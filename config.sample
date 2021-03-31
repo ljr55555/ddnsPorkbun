@@ -1,0 +1,6 @@
+PORKBUN_API_ENDPOINT = "https://porkbun.com/api/json/v3/"
+PORKBUN_API_KEY = 'pk1_YourInfoGoesHere'			# See https://porkbun.com/api/json/v3/documentation for info on creating an API key/secret pair
+PORKBUN_API_SECRET = 'sk1_YourInfoGoesHere'
+
+DOMAINS = ['example.com', 'example.org', 'example.net']
+
