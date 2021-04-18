@@ -29,11 +29,12 @@ if r.status_code == 200:
 					# If the assignment is not an internal address and the assignment differs from the current public IP address
 					if objHostname.get('content')[0:4] != '10.5' and objHostname.get('content') != strPublicIP:
 						url = urljoin(PORKBUN_API_ENDPOINT, f"dns/edit/{strDomain}/{objHostname.get('id')}")
-						req_json = {"apikey": PORKBUN_API_KEY, "secretapikey": PORKBUN_API_SECRET, "name": objHostname.get('name'), "type": objHostname.get('type'), "content": strPublicIP, "ttl": '300'}
+						strHostName = objHostname.get('name')
+						req_json = {"apikey": PORKBUN_API_KEY, "secretapikey": PORKBUN_API_SECRET, "name": strHostName.replace(f'.{strDomain}',''), "type": objHostname.get('type'), "content": strPublicIP, "ttl": '300'}
 						r = requests.post(url=url, json=req_json)
 						print(f"Updating {objHostname.get('name')} to {strPublicIP}:\n{r.status_code} -- {r.text}")
 					else:
-						print(f"Host {objHostname.get('name')} does not need to be updated -- assingment is already {objHostname.get('content')}")
+						print(f"Host {objHostname.get('name')} does not need to be updated -- assignment is already {objHostname.get('content')}")
 
 		else:
 			print("Unable to get hosts in zone {strDomain}:\n")
